@@ -6,7 +6,7 @@ let package = Package(
     name: "LibDovi",
     platforms: [
         .iOS(.v16),
-        .tvOS(.v16),
+        .tvOS(.v17),
         .macOS(.v14),
     ],
     products: [
