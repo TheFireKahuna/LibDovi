@@ -2,7 +2,7 @@
 
 [libdovi](https://github.com/quietvoid/dovi_tool) (the C API of the `dolby_vision` Rust crate, the reference Dolby Vision RPU library behind `dovi_tool`) cross-compiled for Apple platforms and packaged as a SwiftPM binary target.
 
-Used by [AetherEngine](https://github.com/superuser404notfound/AetherEngine) to convert Dolby Vision Profile 7 RPUs to single-layer Profile 8.1 live (`dovi_convert_rpu_with_mode(rpu, 2)`), so the Apple TV engages real Dolby Vision on dual-layer UHD-BD remuxes instead of plain HDR10.
+Used by [AetherEngine](https://github.com/superuser404notfound/AetherEngine) to convert Dolby Vision Profile 7 RPUs to single-layer Profile 8.1 live (`dovi_convert_rpu_with_mode(rpu, 2)`), so the player engages real Dolby Vision on dual-layer UHD-BD remuxes instead of plain HDR10.
 
 ## Consuming
 
@@ -16,14 +16,23 @@ Used by [AetherEngine](https://github.com/superuser404notfound/AetherEngine) to 
 
 ## Slices
 
-`Dovi.xcframework` ships three slices: `macos-arm64`, `tvos-arm64`, `tvos-arm64-simulator`. Minimum tvOS 17.0. (x86_64 tvOS simulator is omitted: it needs nightly Rust + `-Z build-std`, and all Apple TV hardware plus the Xcode default simulator are arm64.)
+`Dovi.xcframework` ships five slices:
+
+- `macos-arm64_x86_64` (fat: Apple Silicon + Intel Macs)
+- `ios-arm64` (device)
+- `ios-arm64_x86_64-simulator` (fat: Apple Silicon + Intel Macs)
+- `tvos-arm64` (device)
+- `tvos-arm64-simulator` (Apple Silicon only)
+
+Minimum deployment tvOS 17.0 / iOS 16.0. The tvOS simulator stays arm64-only: `x86_64-apple-tvos` is a low-tier Rust target with no prebuilt std (would need nightly + `-Z build-std`), and Intel-Mac tvOS-simulator use is not worth that cost. Everything is built with stable Rust.
 
 ## Rebuilding
 
 `./build.sh` cross-compiles libdovi (`dolby_vision` 3.3.2, `capi` feature) via `cargo-c` for each slice and assembles the XCFramework. Requires Rust stable (the tvOS targets are tier-2 with prebuilt std) and `cargo-c`:
 
 ```sh
-rustup target add aarch64-apple-tvos aarch64-apple-tvos-sim
+rustup target add aarch64-apple-tvos aarch64-apple-tvos-sim \
+    aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios x86_64-apple-darwin
 cargo install cargo-c
 ./build.sh
 ```
@@ -32,4 +41,4 @@ The prebuilt `Dovi.xcframework` is committed (mirroring FFmpegBuild), so consume
 
 ## License
 
-libdovi is dual-licensed MIT / Apache-2.0 (see the upstream dovi_tool repository). This packaging carries no additional restrictions.
+libdovi is dual-licensed MIT / Apache-2.0 (see the upstream dovi_tool repository) and is consumed here under the MIT option. The packaging in this repo (build script, SwiftPM stubs) is MIT, see [LICENSE](LICENSE). No additional restrictions.
