@@ -16,23 +16,27 @@ Used by [AetherEngine](https://github.com/superuser404notfound/AetherEngine) to 
 
 ## Slices
 
-`Dovi.xcframework` ships five slices:
+`Dovi.xcframework` ships seven slices:
 
 - `macos-arm64_x86_64` (fat: Apple Silicon + Intel Macs)
 - `ios-arm64` (device)
 - `ios-arm64_x86_64-simulator` (fat: Apple Silicon + Intel Macs)
 - `tvos-arm64` (device)
 - `tvos-arm64-simulator` (Apple Silicon only)
+- `xros-arm64` (device)
+- `xros-arm64-simulator` (Apple Silicon only)
 
-Minimum deployment tvOS 17.0 / iOS 16.0. The tvOS simulator stays arm64-only: `x86_64-apple-tvos` is a low-tier Rust target with no prebuilt std (would need nightly + `-Z build-std`), and Intel-Mac tvOS-simulator use is not worth that cost. Everything is built with stable Rust.
+Minimum deployment tvOS 17.0 / iOS 16.0 / visionOS 1.0. The tvOS and visionOS simulators stay arm64-only: there is no Intel Vision Pro, and `x86_64-apple-tvos` is a low-tier Rust target with no prebuilt std (would need nightly + `-Z build-std`) whose Intel-Mac tvOS-simulator use is not worth that cost. Everything is built with stable Rust.
 
 ## Rebuilding
 
-`./build.sh` cross-compiles libdovi (`dolby_vision` 3.3.2, `capi` feature) via `cargo-c` for each slice and assembles the XCFramework. Requires Rust stable (the tvOS targets are tier-2 with prebuilt std) and `cargo-c`:
+`./build.sh` cross-compiles libdovi (`dolby_vision` 3.3.2, `capi` feature) via `cargo-c` for each slice and assembles the XCFramework. Requires Rust stable (the tvOS and visionOS targets are tier-2 with prebuilt std) and `cargo-c`:
 
 ```sh
 rustup target add aarch64-apple-tvos aarch64-apple-tvos-sim \
-    aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios x86_64-apple-darwin
+    aarch64-apple-ios aarch64-apple-ios-sim \
+    aarch64-apple-visionos aarch64-apple-visionos-sim \
+    x86_64-apple-ios x86_64-apple-darwin
 cargo install cargo-c
 ./build.sh
 ```

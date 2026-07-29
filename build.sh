@@ -3,12 +3,14 @@
 # Usage: ./build.sh
 # Outputs: ~/Dev/LibDovi/Dovi.xcframework
 #
-# Five xcframework slices:
+# Seven xcframework slices:
 #   macos-arm64_x86_64            (fat: Apple Silicon + Intel Macs)
 #   ios-arm64                     (device)
 #   ios-arm64_x86_64-simulator    (fat: Apple Silicon + Intel Macs)
 #   tvos-arm64                    (device)
 #   tvos-arm64-simulator          (Apple Silicon only)
+#   xros-arm64                    (device)
+#   xros-arm64-simulator          (Apple Silicon only)
 #
 # x86_64 is included for macOS and the iOS simulator (Intel-Mac support). The
 # tvOS simulator stays arm64-only: x86_64-apple-tvos is a low-tier Rust target
@@ -39,6 +41,7 @@ echo "==> Adding rustup targets..."
 rustup target add \
     aarch64-apple-tvos aarch64-apple-tvos-sim \
     aarch64-apple-ios aarch64-apple-ios-sim \
+    aarch64-apple-visionos aarch64-apple-visionos-sim \
     x86_64-apple-darwin x86_64-apple-ios
 
 # dolby_vision 3.3.2 lives in the dovi_tool repo at tag libdovi-3.3.2
@@ -87,6 +90,9 @@ build_slice aarch64-apple-tvos-sim appletvsimulator "-mtvos-simulator-version-mi
 build_slice aarch64-apple-ios      iphoneos         "-mios-version-min=16.0"
 build_slice aarch64-apple-ios-sim  iphonesimulator  "-mios-simulator-version-min=16.0"
 build_slice x86_64-apple-ios       iphonesimulator  "-mios-simulator-version-min=16.0"
+# visionOS
+build_slice aarch64-apple-visionos     xros        "-mtargetos=xros1.0"
+build_slice aarch64-apple-visionos-sim xrsimulator "-mtargetos=xros1.0-simulator"
 # macOS
 build_slice aarch64-apple-darwin   ""               ""
 build_slice x86_64-apple-darwin    ""               ""
@@ -147,6 +153,8 @@ stage_slice ios-sim  "$STAGE_DIR/fat/ios-sim.a"
 stage_slice tvos-sim "$(find_lib aarch64-apple-tvos-sim)"
 stage_slice ios      "$(find_lib aarch64-apple-ios)"
 stage_slice tvos     "$(find_lib aarch64-apple-tvos)"
+stage_slice xros     "$(find_lib aarch64-apple-visionos)"
+stage_slice xros-sim "$(find_lib aarch64-apple-visionos-sim)"
 
 rm -rf "$XCFW_OUT"
 echo "==> Assembling Dovi.xcframework..."
@@ -156,6 +164,8 @@ xcodebuild -create-xcframework \
     -library "$STAGE_DIR/ios-sim/libdovi.a"    -headers "$STAGE_DIR/ios-sim/Headers" \
     -library "$STAGE_DIR/tvos/libdovi.a"       -headers "$STAGE_DIR/tvos/Headers" \
     -library "$STAGE_DIR/tvos-sim/libdovi.a"   -headers "$STAGE_DIR/tvos-sim/Headers" \
+    -library "$STAGE_DIR/xros/libdovi.a"       -headers "$STAGE_DIR/xros/Headers" \
+    -library "$STAGE_DIR/xros-sim/libdovi.a"   -headers "$STAGE_DIR/xros-sim/Headers" \
     -output "$XCFW_OUT"
 
 echo ""
