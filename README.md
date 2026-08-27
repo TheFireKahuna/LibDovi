@@ -7,7 +7,7 @@ Used by [AetherEngine](https://github.com/superuser404notfound/AetherEngine) to 
 ## Consuming
 
 ```swift
-.package(url: "https://github.com/superuser404notfound/LibDovi", from: "1.0.0"),
+.package(url: "https://github.com/superuser404notfound/LibDovi", from: "2.1.0"),
 // then add the product:
 .product(name: "Dovi", package: "LibDovi"),
 ```
