@@ -30,7 +30,7 @@ Minimum deployment tvOS 17.0 / iOS 16.0 / visionOS 1.0. The tvOS and visionOS si
 
 ## Rebuilding
 
-`./build.sh` cross-compiles libdovi (`dolby_vision` 3.3.2, `capi` feature) via `cargo-c` for each slice and assembles the XCFramework. Requires Rust stable (the tvOS and visionOS targets are tier-2 with prebuilt std) and `cargo-c`:
+`./build.sh` cross-compiles libdovi (`dolby_vision` 3.4.0, `capi` feature) via `cargo-c` for each slice and assembles the XCFramework. Requires Rust stable (the tvOS and visionOS targets are tier-2 with prebuilt std) and `cargo-c`:
 
 ```sh
 rustup target add aarch64-apple-tvos aarch64-apple-tvos-sim \

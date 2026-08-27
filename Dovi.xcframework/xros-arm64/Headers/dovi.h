@@ -5,8 +5,8 @@
 
 
 #define RPU_PARSER_MAJOR 3
-#define RPU_PARSER_MINOR 3
-#define RPU_PARSER_PATCH 2
+#define RPU_PARSER_MINOR 4
+#define RPU_PARSER_PATCH 0
 
 
 #include <stddef.h>
@@ -160,7 +160,7 @@ typedef struct {
  */
 typedef struct {
     /**
-     * Pointer to the list of Data2D structs
+     * Pointer to the list of I64Data2D structs
      */
     const DoviI64Data2D *const *list;
     /**
@@ -174,7 +174,7 @@ typedef struct {
  */
 typedef struct {
     /**
-     * Pointer to the list of Data2D structs
+     * Pointer to the list of U64Data2D structs
      */
     const DoviU64Data2D *const *list;
     /**
@@ -726,6 +726,30 @@ int32_t dovi_rpu_remove_mapping(DoviRpuOpaque *ptr);
  * # Safety
  * The struct pointer must be valid.
  *
+ * Adds default CMv4.0 extension metadata (L3, L9, L11, L254) to the RPU.
+ * Does nothing if CMv4.0 metadata is already present.
+ *
+ * Returns 1 if metadata was added, 0 if already present, -1 on error.
+ * If an error occurs, it is logged to RpuOpaque.error.
+ */
+int32_t dovi_rpu_add_cmv40_safe_default_metadata(DoviRpuOpaque *ptr);
+
+/**
+ * # Safety
+ * The struct pointer must be valid.
+ *
+ * Removes the CMv4.0 extension metadata from the RPU, leaving a CMv2.9-only RPU.
+ * Does nothing if CMv4.0 metadata is not present.
+ *
+ * Returns 0 on success, -1 on error.
+ * If an error occurs, it is logged to RpuOpaque.error.
+ */
+int32_t dovi_rpu_remove_cmv40_metadata(DoviRpuOpaque *ptr);
+
+/**
+ * # Safety
+ * The struct pointer must be valid.
+ *
  * Writes the encoded RPU as `itu_t_t35_payload_bytes` for AV1 ITU-T T.35 metadata OBU
  * If an error occurs in the writing, it is logged to RpuOpaque.error
  */
@@ -739,6 +763,20 @@ const DoviData *dovi_write_av1_rpu_metadata_obu_t35_payload(DoviRpuOpaque *ptr);
  * If an error occurs in the writing, it is logged to RpuOpaque.error
  */
 const DoviData *dovi_write_av1_rpu_metadata_obu_t35_complete(DoviRpuOpaque *ptr);
+
+/**
+ * # Safety
+ * The JSON string pointer must be valid.
+ *
+ * Generates RPUs from a JSON serialized `GenerateConfig`.
+ * Returns the heap allocated `DoviRpuOpaqueList` as a pointer.
+ * The returned pointer may be null, or the list could be empty if an error occurred.
+ *
+ * Requires the `serde` feature.
+ *
+ * Free with `dovi_rpu_list_free`.
+ */
+const DoviRpuOpaqueList *dovi_generate_from_json(const char *json);
 
 #ifdef __cplusplus
 }  // extern "C"

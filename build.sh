@@ -44,9 +44,19 @@ rustup target add \
     aarch64-apple-visionos aarch64-apple-visionos-sim \
     x86_64-apple-darwin x86_64-apple-ios
 
-# dolby_vision 3.3.2 lives in the dovi_tool repo at tag libdovi-3.3.2
-DOVI_TAG="libdovi-3.3.2"
+# dolby_vision 3.4.0 lives in the dovi_tool repo at tag libdovi-3.4.0
+DOVI_TAG="libdovi-3.4.0"
 DOVI_REPO_DIR="$BUILD_DIR/dovi_tool"
+
+# A checkout at a different tag than the one asked for is stale: the clone below is skipped
+# whenever the directory exists, so bumping DOVI_TAG alone would rebuild the OLD crate and
+# produce an xcframework that changed nothing. Membership, not `git describe`: this repo carries
+# two tag series on the same commits (the CLI's `2.3.0` and the library's `libdovi-3.3.2`), so
+# describe can answer with the other one and read as a mismatch when it is not.
+if [ -d "$DOVI_REPO_DIR" ] && ! git -C "$DOVI_REPO_DIR" tag --points-at HEAD 2>/dev/null | grep -qx "$DOVI_TAG"; then
+    echo "==> dovi_tool is not at $DOVI_TAG: discarding and re-cloning"
+    rm -rf "$DOVI_REPO_DIR"
+fi
 
 if [ -d "$DOVI_REPO_DIR" ]; then
     echo "==> dovi_tool already cloned, skipping clone"
