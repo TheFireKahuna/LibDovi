@@ -43,6 +43,12 @@ cargo install cargo-c
 
 The prebuilt `Dovi.xcframework` is committed (mirroring FFmpegBuild), so consumers do not need a Rust toolchain.
 
+## Build record
+
+The library is built on a local Mac, not in CI, so there is no attestation. `./build.sh` writes [`BUILD-INFO.txt`](BUILD-INFO.txt) instead: the dovi_tool tag and commit, Xcode, clang, SDK, rustc, cargo and cargo-c versions, the resolved dependency tree, and the SHA-256 of every shipped `libdovi.a` and header. The build runs with `--locked` against the `Cargo.lock` the crate ships at its tag, and a copy of that lock is committed as [`BUILD-INFO.Cargo.lock`](BUILD-INFO.Cargo.lock).
+
+The first record was written by a rebuild of 2.1.0 with this toolchain, and every `libdovi.a` it produced is byte-identical to the one committed for 2.1.0, so it describes those binaries as well. Earlier releases have no record.
+
 ## License
 
 libdovi is dual-licensed MIT / Apache-2.0 (see the upstream dovi_tool repository) and is consumed here under the MIT option. The packaging in this repo (build script, SwiftPM stubs) is MIT, see [LICENSE](LICENSE). No additional restrictions.

@@ -1,0 +1,88 @@
+# LibDovi build record
+
+Written by build.sh after packaging.
+
+Built      2026-10-20T13:40:10Z
+Repo HEAD  0d7cce1d6836a30d13a3a2326e50a153af53f014 (build.sh differs from it)
+build.sh   sha256 fd6f337830643850a60c5e7e682c40aa6572b89e8e72af2bdffb4e711b2ff57d
+
+## Host and toolchain
+macOS      27.0 (26A428), arm64
+Xcode      Xcode 27.0 Build version 27A266a
+clang      Apple clang version 21.0.0 (clang-2100.3.34.2)
+SDK        iphoneos 27.0 (24A430)
+SDK        iphonesimulator 27.0 (24A430)
+SDK        appletvos 27.0 (24J360)
+SDK        appletvsimulator 27.0 (24J360)
+SDK        xros 27.0 (24M361)
+SDK        xrsimulator 27.0 (24M361)
+SDK        macosx 27.0 (26A425)
+rustup     stable-aarch64-apple-darwin (default)
+rustc      rustc 1.96.0 (ac68faa20 2026-05-25)
+rustc      binary: rustc
+rustc      commit-hash: ac68faa20c58cbccd01ee7208bf3b6e93a7d7f96
+rustc      commit-date: 2026-05-25
+rustc      host: aarch64-apple-darwin
+rustc      release: 1.96.0
+rustc      LLVM version: 22.1.2
+cargo      cargo 1.96.0 (30a34c682 2026-05-25)
+cargo-c    cargo-c 0.10.23+cargo-0.97.1
+
+## Source
+dovi_tool  libdovi-3.4.0 d1abe0e27ff2c7ab3339614d06db9f8a058af6b2
+crate      dolby_vision, cargo cbuild --release --locked --features capi
+Cargo.lock sha256 5c9f344b8a49f684e409af8304e4e175618098c9b24ed8acafc5f1a469088814 (copy: BUILD-INFO.Cargo.lock)
+
+## Resolved dependencies (aarch64-apple-tvos; the lock is shared by every slice)
+dolby_vision v3.4.0 (<dovi_tool>/dolby_vision)
+├── anyhow v1.0.102
+├── bitvec v1.0.1
+│   ├── funty v2.0.0
+│   ├── radium v0.7.0
+│   ├── tap v1.0.1
+│   └── wyz v0.5.1
+│       └── tap v1.0.1
+├── bitvec_helpers v4.0.2
+│   └── bitstream-io v4.10.0
+│       └── no_std_io2 v0.9.4
+│           └── memchr v2.8.0
+├── crc v3.4.0
+│   └── crc-catalog v2.5.0
+├── libc v0.2.186
+├── serde v1.0.228
+│   ├── serde_core v1.0.228
+│   └── serde_derive v1.0.228 (proc-macro)
+│       ├── proc-macro2 v1.0.106
+│       │   └── unicode-ident v1.0.24
+│       ├── quote v1.0.45
+│       │   └── proc-macro2 v1.0.106 (*)
+│       └── syn v2.0.117
+│           ├── proc-macro2 v1.0.106 (*)
+│           ├── quote v1.0.45 (*)
+│           └── unicode-ident v1.0.24
+├── serde_json v1.0.149
+│   ├── indexmap v2.14.0
+│   │   ├── equivalent v1.0.2
+│   │   └── hashbrown v0.17.1
+│   ├── itoa v1.0.18
+│   ├── memchr v2.8.0
+│   ├── serde_core v1.0.228
+│   └── zmij v1.0.21
+└── tinyvec v1.11.0
+    └── serde_core v1.0.228
+
+## Shipped files (sha256)
+772414183763c6ab234789f38fd6850168faf6b288a1763b6bb19370b14af7be  Dovi.xcframework/ios-arm64_x86_64-simulator/Headers/dovi.h
+caa8158bd6f2cc0a15d6c48bbbb3d40a96c263f6492071aa27a26a469d8f09bf  Dovi.xcframework/ios-arm64_x86_64-simulator/libdovi.a
+772414183763c6ab234789f38fd6850168faf6b288a1763b6bb19370b14af7be  Dovi.xcframework/ios-arm64/Headers/dovi.h
+4f1d28ac878f1c798684de56c1790c27bcfddf491e24fded54024cc34a79a004  Dovi.xcframework/ios-arm64/libdovi.a
+772414183763c6ab234789f38fd6850168faf6b288a1763b6bb19370b14af7be  Dovi.xcframework/macos-arm64_x86_64/Headers/dovi.h
+e34e05a0f92c81b1033d1db8b0acdbf2f0fbc61491e20baa23d6ad2424f4e251  Dovi.xcframework/macos-arm64_x86_64/libdovi.a
+772414183763c6ab234789f38fd6850168faf6b288a1763b6bb19370b14af7be  Dovi.xcframework/tvos-arm64-simulator/Headers/dovi.h
+001a7890e3455d38a180becad09ebdd273e0c73433e8a26eea7485d5ed7010c7  Dovi.xcframework/tvos-arm64-simulator/libdovi.a
+772414183763c6ab234789f38fd6850168faf6b288a1763b6bb19370b14af7be  Dovi.xcframework/tvos-arm64/Headers/dovi.h
+3d4a89cfc8f4b3bf1fc9285e07684db1b7d75ced7dc6657c37cb879129c515b6  Dovi.xcframework/tvos-arm64/libdovi.a
+772414183763c6ab234789f38fd6850168faf6b288a1763b6bb19370b14af7be  Dovi.xcframework/xros-arm64-simulator/Headers/dovi.h
+fdc02ba49090c629dd5dd1984ff0cef6770f310f968d35b87cadcc26aafe3c7a  Dovi.xcframework/xros-arm64-simulator/libdovi.a
+772414183763c6ab234789f38fd6850168faf6b288a1763b6bb19370b14af7be  Dovi.xcframework/xros-arm64/Headers/dovi.h
+b57ba4cc90c448b0ff01e82b3de58f4a3fe871468897f7c7fbe1b0995fa30700  Dovi.xcframework/xros-arm64/libdovi.a
