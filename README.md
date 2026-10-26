@@ -4,10 +4,16 @@
 
 Used by [AetherEngine](https://github.com/superuser404notfound/AetherEngine) to convert Dolby Vision Profile 7 RPUs to single-layer Profile 8.1 live (`dovi_convert_rpu_with_mode(rpu, 2)`), so the player engages real Dolby Vision on dual-layer UHD-BD remuxes instead of plain HDR10.
 
+## This fork
+
+TheFireKahuna/LibDovi builds libdovi from [TheFireKahuna/dovi_tool](https://github.com/TheFireKahuna/dovi_tool) instead of the published `libdovi-3.4.0` tag. Releases are tagged `<version>-fire.<n>`, a pre-release so they never collide with an upstream tag, and each names the dovi_tool tag it builds in `build.sh` and `BUILD-INFO.txt`.
+
+- dovi_tool `2.3.4`: CM v4.0 level 253 blocks parse (Disney+ v4.0 RPUs carry them; `libdovi-3.4.0` rejects the RPU), and `DoviDmData` gains a `level253` pointer.
+
 ## Consuming
 
 ```swift
-.package(url: "https://github.com/superuser404notfound/LibDovi", from: "2.1.0"),
+.package(url: "https://github.com/TheFireKahuna/LibDovi", exact: "2.2.0-fire.1"),
 // then add the product:
 .product(name: "Dovi", package: "LibDovi"),
 ```
@@ -30,7 +36,7 @@ Minimum deployment tvOS 17.0 / iOS 16.0 / visionOS 1.0. The tvOS and visionOS si
 
 ## Rebuilding
 
-`./build.sh` cross-compiles libdovi (`dolby_vision` 3.4.0, `capi` feature) via `cargo-c` for each slice and assembles the XCFramework. Requires Rust stable (the tvOS and visionOS targets are tier-2 with prebuilt std) and `cargo-c`:
+`./build.sh` cross-compiles libdovi (`dolby_vision` from the dovi_tool tag `build.sh` names, `capi` feature) via `cargo-c` for each slice and assembles the XCFramework. Requires Rust stable (the tvOS and visionOS targets are tier-2 with prebuilt std) and `cargo-c`:
 
 ```sh
 rustup target add aarch64-apple-tvos aarch64-apple-tvos-sim \

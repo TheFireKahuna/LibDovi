@@ -44,8 +44,11 @@ rustup target add \
     aarch64-apple-visionos aarch64-apple-visionos-sim \
     x86_64-apple-darwin x86_64-apple-ios
 
-# dolby_vision 3.4.0 lives in the dovi_tool repo at tag libdovi-3.4.0
-DOVI_TAG="libdovi-3.4.0"
+# dolby_vision comes from TheFireKahuna/dovi_tool, a fork of quietvoid's. The tag is dovi_tool 2.3.4,
+# whose dolby_vision (still versioned 3.4.0) parses CM v4.0 level 253 blocks, which the libdovi-3.4.0
+# release rejects.
+DOVI_URL="https://github.com/TheFireKahuna/dovi_tool.git"
+DOVI_TAG="2.3.4"
 DOVI_REPO_DIR="$BUILD_DIR/dovi_tool"
 
 # A checkout at a different tag than the one asked for is stale: the clone below is skipped
@@ -64,7 +67,7 @@ else
     mkdir -p "$BUILD_DIR"
     echo "==> Cloning dovi_tool at tag $DOVI_TAG..."
     git clone --depth 1 --branch "$DOVI_TAG" \
-        https://github.com/quietvoid/dovi_tool.git \
+        "$DOVI_URL" \
         "$DOVI_REPO_DIR"
 fi
 
