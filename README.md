@@ -9,11 +9,12 @@ Used by [AetherEngine](https://github.com/superuser404notfound/AetherEngine) to 
 TheFireKahuna/LibDovi builds libdovi from [TheFireKahuna/dovi_tool](https://github.com/TheFireKahuna/dovi_tool) instead of the published `libdovi-3.4.0` tag. Releases are tagged `<version>-fire.<n>`, a pre-release so they never collide with an upstream tag, and each names the dovi_tool tag it builds in `build.sh` and `BUILD-INFO.txt`.
 
 - dovi_tool `2.3.4`: CM v4.0 level 253 blocks parse (Disney+ v4.0 RPUs carry them; `libdovi-3.4.0` rejects the RPU), and `DoviDmData` gains a `level253` pointer.
+- `libdovi-3.4.0-fire.1`: DM extension blocks at reserved levels are kept as their payload bytes (`ReservedExtMetadataBlock`, reporting the real level) and written back unchanged, instead of failing the whole RPU (an unknown level, a CM v4.0 level in the CM v2.9 list, the ST 2094-10 L3). The CM v2.9 L2 cap goes from 8 to 16.
 
 ## Consuming
 
 ```swift
-.package(url: "https://github.com/TheFireKahuna/LibDovi", exact: "2.2.0-fire.1"),
+.package(url: "https://github.com/TheFireKahuna/LibDovi", exact: "2.2.0-fire.2"),
 // then add the product:
 .product(name: "Dovi", package: "LibDovi"),
 ```
