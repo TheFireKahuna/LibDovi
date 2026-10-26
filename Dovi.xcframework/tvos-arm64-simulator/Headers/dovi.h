@@ -301,7 +301,9 @@ typedef struct {
 } DoviExtMetadataBlockLevel3;
 
 /**
- * Something about temporal stability
+ * Level 4, "Temporally Filtered Image Level" (ETSI TS 103 572 Table 3 / 4.3): `anchor_pq` is the spec's
+ * `TF_PQ_mean` and `anchor_power` its `TF_PQ_stdev`, the temporally filtered mean and standard deviation of the
+ * frame's maxRGB in 12-bit PQ.
  */
 typedef struct {
     uint16_t anchor_pq;
@@ -622,16 +624,18 @@ const DoviData *dovi_write_unspec62_nalu(DoviRpuOpaque *ptr);
 /**
  * # Safety
  * The struct pointer must be valid.
- * The mode must be between 0 and 4.
+ * The mode must be between 0 and 4; any other value is treated as 0.
  *
  * Converts the RPU to be compatible with a different Dolby Vision profile.
- * Possible modes:
+ * Possible modes (as `ConversionMode::from(u8)` maps them):
  *     - 0: Don't modify the RPU
  *     - 1: Converts the RPU to be MEL compatible
- *     - 2: Converts the RPU to be profile 8.1 compatible. Both luma and chroma mapping curves are set to no-op.
+ *     - 2 and 3: Converts the RPU to be profile 8.1 compatible. The mapping curves are set to no-op only when
+ *          the RPU's own `el_type` is FEL; a MEL RPU, or a FEL stream's RPU with `disable_residual_flag` set,
+ *          keeps its curves (use `dovi_rpu_remove_mapping` to neutralise them).
  *          This mode handles source profiles 5, 7 and 8.
- *     - 3: Converts to static profile 8.4
- *     - 4: Converts to profile 8.1 preserving luma and chroma mapping. Old mode 2 behaviour.
+ *     - 4: Converts to static profile 8.4
+ *     The mapping-preserving 8.1 conversion has no mode number here.
  *
  * If an error occurs, it is logged to RpuOpaque.error.
  * Returns 0 if successful, -1 otherwise.
