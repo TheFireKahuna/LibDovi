@@ -16,6 +16,10 @@
 
 #define DoviNUM_COMPONENTS 3
 
+#define DoviLEVEL253_MAX_LENGTH 66
+
+#define DoviLEVEL253_FILLER_BYTE 85
+
 /**
  * Opaque Dolby Vision RPU.
  *
@@ -483,6 +487,7 @@ typedef struct {
     const DoviExtMetadataBlockLevel11 *level11;
     const DoviExtMetadataBlockLevel254 *level254;
     const DoviExtMetadataBlockLevel255 *level255;
+    const DoviData *level253;
 } DoviDmData;
 
 /**
