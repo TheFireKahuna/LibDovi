@@ -10,11 +10,12 @@ TheFireKahuna/LibDovi builds libdovi from [TheFireKahuna/dovi_tool](https://gith
 
 - dovi_tool `2.3.4`: CM v4.0 level 253 blocks parse (Disney+ v4.0 RPUs carry them; `libdovi-3.4.0` rejects the RPU), and `DoviDmData` gains a `level253` pointer.
 - `libdovi-3.4.0-fire.1`: DM extension blocks at reserved levels are kept as their payload bytes (`ReservedExtMetadataBlock`, reporting the real level) and written back unchanged, instead of failing the whole RPU (an unknown level, a CM v4.0 level in the CM v2.9 list, the ST 2094-10 L3). The CM v2.9 L2 cap goes from 8 to 16.
+- `libdovi-3.4.0-fire.2`: the 8.1 conversion of a profile 7 or 8 RPU (modes 2 and 3, and the mapping-preserving form) keeps the DM data's `YCCtoRGB` / `RGBtoLMS` coefficients and offsets instead of the 8.1 defaults (limited BT.2020 YCbCr), which describe a different picture when the source states another range or matrix. Profile 5 sources and 8.4 still get the defaults.
 
 ## Consuming
 
 ```swift
-.package(url: "https://github.com/TheFireKahuna/LibDovi", exact: "2.2.0-fire.2"),
+.package(url: "https://github.com/TheFireKahuna/LibDovi", exact: "2.2.0-fire.3"),
 // then add the product:
 .product(name: "Dovi", package: "LibDovi"),
 ```
