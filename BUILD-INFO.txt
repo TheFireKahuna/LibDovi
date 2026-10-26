@@ -2,9 +2,9 @@
 
 Written by build.sh after packaging.
 
-Built      2026-10-26T15:41:16Z
-Repo HEAD  ae10a0cb4e28b9980e71f340e35be5497fcd7abf
-build.sh   sha256 46e8168dc07d57f9df11cb19d060210f67e11b94d1f585aecd6cd53e56f1090d
+Built      2026-10-26T15:41:46Z
+Repo HEAD  e0626f70db7db4190d481e498273124aef913641
+build.sh   sha256 5401835df7ce853dde2b756e1cf7b9ef0695d9a982f7a7f340071ea3793da924
 
 ## Host and toolchain
 macOS      27.0.1 (26A434), arm64
@@ -29,7 +29,7 @@ cargo      cargo 1.96.0 (30a34c682 2026-05-25)
 cargo-c    cargo-c 0.10.25+cargo-0.99.0
 
 ## Source
-dovi_tool  libdovi-3.4.0-fire.1 57c97e7e2768e2b3899bd764626e4f25dfa98dea
+dovi_tool  libdovi-3.4.0-fire.2 6d758fe2b9c1575579e791220aad8d96eba79ec3
 crate      dolby_vision, cargo cbuild --release --locked --features capi
 Cargo.lock sha256 b5c27d3199fcf7a49aea1f5ec864f9fea65613e9473ad1e86cb1ffb2d47c7033 (copy: BUILD-INFO.Cargo.lock)
 
@@ -72,17 +72,17 @@ dolby_vision v3.4.0 (<dovi_tool>/dolby_vision)
     └── serde_core v1.0.228
 
 ## Shipped files (sha256)
-123e0efefb3c2ae8d26a748ad676696c0d31446f9be74d9799a7c6919084aa33  Dovi.xcframework/ios-arm64_x86_64-simulator/Headers/dovi.h
-a6e64e608b35de1c71452af58dd051c5da92ae24887dc95113a2bca0e1ae92ac  Dovi.xcframework/ios-arm64_x86_64-simulator/libdovi.a
-123e0efefb3c2ae8d26a748ad676696c0d31446f9be74d9799a7c6919084aa33  Dovi.xcframework/ios-arm64/Headers/dovi.h
-f69fb76bd0ca5db3af574ecb0e1726857d5b58617c6e649b9c16ff8555e231e0  Dovi.xcframework/ios-arm64/libdovi.a
-123e0efefb3c2ae8d26a748ad676696c0d31446f9be74d9799a7c6919084aa33  Dovi.xcframework/macos-arm64_x86_64/Headers/dovi.h
-1cc418aa44fdeb7f56280f70f55aabbb64c0ff108f574b6969826c201bd6ead0  Dovi.xcframework/macos-arm64_x86_64/libdovi.a
-123e0efefb3c2ae8d26a748ad676696c0d31446f9be74d9799a7c6919084aa33  Dovi.xcframework/tvos-arm64-simulator/Headers/dovi.h
-ea6d64c80b504d494f8d51712ff6f4448494ac80e2097642771061dc42fd8b90  Dovi.xcframework/tvos-arm64-simulator/libdovi.a
-123e0efefb3c2ae8d26a748ad676696c0d31446f9be74d9799a7c6919084aa33  Dovi.xcframework/tvos-arm64/Headers/dovi.h
-8b3dc6597a4c17cac70f2aa0b025421a487dc9ad0a22bf1173bc20a4a71ab765  Dovi.xcframework/tvos-arm64/libdovi.a
-123e0efefb3c2ae8d26a748ad676696c0d31446f9be74d9799a7c6919084aa33  Dovi.xcframework/xros-arm64-simulator/Headers/dovi.h
-f99aadc88dd307b38726a9fd9c6eaef2138b77948845ef16983b18afec270df6  Dovi.xcframework/xros-arm64-simulator/libdovi.a
-123e0efefb3c2ae8d26a748ad676696c0d31446f9be74d9799a7c6919084aa33  Dovi.xcframework/xros-arm64/Headers/dovi.h
-5018f771edfae64b0c2cf00d3ac5091609f59d5d4f7de81722b461ec0141b8cc  Dovi.xcframework/xros-arm64/libdovi.a
+21126dac9bb89728fa6eecc347f697eafe0a761d1029c3103a50fbb0656f98a8  Dovi.xcframework/ios-arm64_x86_64-simulator/Headers/dovi.h
+27e7c6a030d1c1085372981c6d432a66921b1da56e7bca8eae28db29d3013d36  Dovi.xcframework/ios-arm64_x86_64-simulator/libdovi.a
+21126dac9bb89728fa6eecc347f697eafe0a761d1029c3103a50fbb0656f98a8  Dovi.xcframework/ios-arm64/Headers/dovi.h
+cd8122ce5aea5c43e136dfc29031659945e11d21ec6b8fd36c2da51a2baf4ffc  Dovi.xcframework/ios-arm64/libdovi.a
+21126dac9bb89728fa6eecc347f697eafe0a761d1029c3103a50fbb0656f98a8  Dovi.xcframework/macos-arm64_x86_64/Headers/dovi.h
+48a5c651ca5e8289c3037f2ed0cd5e4b915260c360e339a67a45de99e693bcca  Dovi.xcframework/macos-arm64_x86_64/libdovi.a
+21126dac9bb89728fa6eecc347f697eafe0a761d1029c3103a50fbb0656f98a8  Dovi.xcframework/tvos-arm64-simulator/Headers/dovi.h
+6273e46942899dad1faef4d797218fa93efe11c01d6572627ed4141ef21ee7be  Dovi.xcframework/tvos-arm64-simulator/libdovi.a
+21126dac9bb89728fa6eecc347f697eafe0a761d1029c3103a50fbb0656f98a8  Dovi.xcframework/tvos-arm64/Headers/dovi.h
+d454bbaa55f69355a3ca1ed5d342e6295d548a440d4e49a74652cbf57a2736dd  Dovi.xcframework/tvos-arm64/libdovi.a
+21126dac9bb89728fa6eecc347f697eafe0a761d1029c3103a50fbb0656f98a8  Dovi.xcframework/xros-arm64-simulator/Headers/dovi.h
+290f220b2fa75cea5d22c6ee21a37d8209f8a72c756491bdf9303115d60d4f42  Dovi.xcframework/xros-arm64-simulator/libdovi.a
+21126dac9bb89728fa6eecc347f697eafe0a761d1029c3103a50fbb0656f98a8  Dovi.xcframework/xros-arm64/Headers/dovi.h
+2c364d7cdd99f00534f0e1cdef00ba9876cf77953afe6753bca73eb94bc4518c  Dovi.xcframework/xros-arm64/libdovi.a

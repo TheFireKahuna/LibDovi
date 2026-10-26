@@ -633,6 +633,8 @@ const DoviData *dovi_write_unspec62_nalu(DoviRpuOpaque *ptr);
  *     - 2 and 3: Converts the RPU to be profile 8.1 compatible. The mapping curves are set to no-op only when
  *          the RPU's own `el_type` is FEL; a MEL RPU, or a FEL stream's RPU with `disable_residual_flag` set,
  *          keeps its curves (use `dovi_rpu_remove_mapping` to neutralise them).
+ *          A profile 7 or 8 RPU keeps its DM coefficients and offsets (the output picture's representation and
+ *          range); a profile 5 RPU gets the 8.1 ones.
  *          This mode handles source profiles 5, 7 and 8.
  *     - 4: Converts to static profile 8.4
  *     The mapping-preserving 8.1 conversion has no mode number here.
